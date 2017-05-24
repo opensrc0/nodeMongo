@@ -1,23 +1,25 @@
 var express = require("express");
-var MongoClient = require('mongodb').MongoClient;
 
-// var mongoose = require("mongoose");
-var MongoClient = require('mongodb').MongoClient;
-MongoClient.connect("mongodb://127.0.0.1:27017/bench", function (err, db) {
-	if(!err) {
-		console.log("We are connected");
-	} else {
-		console.log(err);
-		console.log(db);
-	}
-});
-// var connection = mongoose.connect('mongodb://127.0.0.1:27017/users_test').connection;
-// connection.on("error", function(error){
-// 	console.log(error);
-// });
+require('./backEnd/mongoConnect.js');
+
+
 
 var app = express();
 var router = express.Router();
+
+router.get("/login", function (req, res) {
+	// res.sendFile(__dirname + "/js/login.js");
+	// res.send({"message" : "You are in Login Page"});
+	res.render('login', { title: 'Hello, World!' });
+});
+
+router.get("/logout", function (req, res) {
+	res.send({"message" : "You are in logout Page"});
+});
+
+router.get("/register", function (req, res) {
+	res.send({"message" : "You are in register Page"});
+});
 
 router.get("/home", function (req, res) {
 	res.send({"message" : "You are in home Page"});
